@@ -1,4 +1,4 @@
-import { red, stripColor } from "https://deno.land/std/fmt/colors.ts";
+import { red, stripColor } from "https://deno.land/std@0.115.0/fmt/colors.ts";
 
 import {
   prompt,
@@ -253,7 +253,9 @@ export const readCommand = async () => {
             currentBuffer.cursorPosition = previousTokenIndex;
           }
 
-          await setCursorColumn(leftmostColumnCache + currentBuffer.cursorPosition);
+          await setCursorColumn(
+            leftmostColumnCache + currentBuffer.cursorPosition
+          );
         },
         altRight: async () => {
           if (currentBuffer.cursorPosition === currentBuffer.text.length) {
@@ -271,20 +273,20 @@ export const readCommand = async () => {
             currentBuffer.cursorPosition = nextTokenIndex;
           }
 
-          await setCursorColumn(leftmostColumnCache + currentBuffer.cursorPosition);
+          await setCursorColumn(
+            leftmostColumnCache + currentBuffer.cursorPosition
+          );
         },
         home: async () => {
-          currentBuffer.cursorPosition = getPositionAtStartOfCurrentLine(
-            currentBuffer
-          );
+          currentBuffer.cursorPosition =
+            getPositionAtStartOfCurrentLine(currentBuffer);
           await setCursorColumn(
             leftmostColumnCache + getCursorColumn(currentBuffer)
           );
         },
         end: async () => {
-          currentBuffer.cursorPosition = getPositionAtEndOfCurrentLine(
-            currentBuffer
-          );
+          currentBuffer.cursorPosition =
+            getPositionAtEndOfCurrentLine(currentBuffer);
           await setCursorColumn(
             leftmostColumnCache + getCursorColumn(currentBuffer)
           );
@@ -447,9 +449,8 @@ export const readCommand = async () => {
               Uint8Array.from(reverseControlCharactersBytesMap.cursorUp)
             );
 
-            currentBuffer.cursorPosition = getCursorPositionAfterMoveUp(
-              currentBuffer
-            );
+            currentBuffer.cursorPosition =
+              getCursorPositionAfterMoveUp(currentBuffer);
 
             const column = getCursorColumn(currentBuffer);
             await setCursorColumn(leftmostColumnCache + column);
@@ -474,9 +475,8 @@ export const readCommand = async () => {
               Uint8Array.from(reverseControlCharactersBytesMap.cursorDown)
             );
 
-            currentBuffer.cursorPosition = getCursorPositionAfterMoveDown(
-              currentBuffer
-            );
+            currentBuffer.cursorPosition =
+              getCursorPositionAfterMoveDown(currentBuffer);
 
             const column = getCursorColumn(currentBuffer);
             await setCursorColumn(leftmostColumnCache + column);

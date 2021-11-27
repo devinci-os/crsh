@@ -1,4 +1,4 @@
-import { stripColor } from "https://deno.land/std/fmt/colors.ts";
+import { stripColor } from "https://deno.land/std@0.115.0/fmt/colors.ts";
 import {
   prompt as userPrompt,
   multilineGutter as userMultilineGutter,
@@ -11,7 +11,7 @@ export const prompt = userPrompt;
 export const getLengthOfLastLine = (potentiallyColouredInput) => {
   const split = stripColor(potentiallyColouredInput).split("\n");
   return split[split.length - 1].length;
-}
+};
 
 export const promptHeight = (prompt) => stripColor(prompt).split("\n").length;
 
