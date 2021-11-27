@@ -1,12 +1,12 @@
-import { StringReader } from "https://deno.land/std@0.50.0/io/readers.ts";
-import { StringWriter } from "https://deno.land/std@0.50.0/io/writers.ts";
+import { StringReader } from "https://deno.land/std@0.115.0/io/readers.ts";
+import { StringWriter } from "https://deno.land/std@0.115.0/io/writers.ts";
 
 import { builtins, defaultExtraUnixArgs } from "./builtins.js";
 import {
   mergeArgsBetweenQuotes,
   replaceEnvVars,
   evalAndInterpolateJS,
-  expandCommand
+  expandCommand,
 } from "./util.js";
 
 export const run = (userInput, isTTY) => {
@@ -189,9 +189,7 @@ export const run = (userInput, isTTY) => {
           }
 
           if (isLast && outputFile === null) {
-            await Deno.stdout.write(
-              new TextEncoder().encode(`${nextContent}`)
-            );
+            await Deno.stdout.write(new TextEncoder().encode(`${nextContent}`));
           } else if (isLast && outputFile !== null) {
             await outputFile.write(
               new TextEncoder().encode(`${nextContent}\n`)
