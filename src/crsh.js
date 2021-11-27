@@ -6,7 +6,10 @@ await startup();
 
 const runMain = async () => {
   // Catch SIGINT.
-  Deno.signal(Deno.Signal.SIGINT);
+  Deno.addSignalListener("SIGINT", (_) => {
+    console.log("interrupted!");
+    Deno.exit();
+  });
 
   while (true) {
     const userInput = await readCommand();
@@ -17,6 +20,6 @@ const runMain = async () => {
       console.error(err);
     }
   }
-}
+};
 
 await runMain();
